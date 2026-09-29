@@ -12,8 +12,15 @@ abstract class HomeStoreBase with Store {
   @action
   void loadEvents() {
     isLoading = true;
+
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+
     events.clear();
-    events.addAll(EventMock.events);
+
+    events
+        .addAll(EventMock.events.where((event) => !event.date.isBefore(today)));
+
     events.sort(
       (a, b) {
         return a.date.compareTo(b.date);

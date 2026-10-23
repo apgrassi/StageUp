@@ -60,6 +60,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Expanded(
                   child: TextFormField(
+                    onChanged: store.setSearchText,
                     decoration: InputDecoration(
                       hintText: 'Buscar shows, artistas ou locais',
                       prefixIcon: Icon(Icons.search),
@@ -109,16 +110,17 @@ class _HomePageState extends State<HomePage> {
                 if (store.errorMessage != null) {
                   return Text(store.errorMessage!);
                 }
-                if (store.events.isEmpty) {
+                final visibleEvents = store.filteredEvents;
+                if (visibleEvents.isEmpty) {
                   return const Center(
                     child: Text('Nenhum evento encontrado'),
                   );
                 }
 
                 return ListView.builder(
-                  itemCount: store.events.length,
+                  itemCount: visibleEvents.length,
                   itemBuilder: (context, index) {
-                    final event = store.events[index];
+                    final event = visibleEvents[index];
 
                     return Padding(
                       padding: const EdgeInsets.only(bottom: AppSpacing.s),

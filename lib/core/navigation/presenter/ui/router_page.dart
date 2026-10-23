@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:stage_up/core/navigation/presenter/store/navigation_store.dart';
-import 'package:stage_up/modules/explore/presenter/explore_page.dart';
+import 'package:stage_up/modules/explore/presenter/pages/explore_page.dart';
+import 'package:stage_up/modules/explore/presenter/store/explore_store.dart';
 import 'package:stage_up/modules/favorites/presenter/pages/favorites_page.dart';
 import 'package:stage_up/modules/favorites/presenter/store/favorites_store.dart';
 import 'package:stage_up/modules/home/presenter/pages/home_page.dart';
@@ -13,16 +14,18 @@ class RouterPage extends StatelessWidget {
   final NavigationStore navigationStore;
   final FavoriteStore favoriteStore;
   final HomeStore homeStore;
+  final ExploreStore exploreStore;
   RouterPage(
       {super.key,
       required this.navigationStore,
       required this.favoriteStore,
-      required this.homeStore});
+      required this.homeStore,
+      required this.exploreStore});
 
   late final List<Widget> pages = [
     HomePage(favoritesStore: favoriteStore, homeStore: homeStore),
-    const ExplorePage(),
-    FavoritesPage(store: favoriteStore), // Pass the favoriteStore instance here
+    ExplorePage(exploreStore: exploreStore, favoritesStore: favoriteStore),
+    FavoritesPage(store: favoriteStore),
     const TicketsPage(),
     const ProfilePage(),
   ];

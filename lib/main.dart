@@ -16,8 +16,10 @@ Future<void> main() async {
 
   runApp(
     ModularApp(
-      module:
-          AppModule(favoriteStorage: storege, initialEvents: initialFavorites),
+      module: AppModule(
+          favoriteStorage: storege,
+          events: EventMock.events,
+          initialEvents: initialFavorites),
       child: const StageUpApp(),
     ),
   );

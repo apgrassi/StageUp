@@ -9,6 +9,27 @@ class HomeStore = HomeStoreBase with _$HomeStore;
 abstract class HomeStoreBase with Store {
   final ObservableList<Event> events = ObservableList<Event>();
 
+  @observable
+  String searchText = '';
+
+  @action
+  void setSearchText(String? value) {
+    searchText = value ?? '';
+  }
+
+  @computed
+  List<Event> get filteredEvents {
+    final query = searchText.trim().toLowerCase();
+    if (query.isEmpty) {
+      return events.toList();
+    }
+    return events.where((event) {
+      final name = event.name.toLowerCase();
+      final location = event.location.toLowerCase();
+      return name.contains(query) || location.contains(query);
+    }).toList();
+  }
+
   @action
   void loadEvents() {
     isLoading = true;

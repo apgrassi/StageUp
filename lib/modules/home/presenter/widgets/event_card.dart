@@ -18,7 +18,9 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formattedDate = DateFormat('dd/MM/yyyy').format(event.date);
+    final formattedDate = event.isPostponed
+        ? 'Data a ser definida'
+        : DateFormat('dd/MM/yyyy').format(event.date);
     return Container(
       height: AppSize.cardEventHeight,
       decoration: BoxDecoration(
@@ -32,13 +34,40 @@ class EventCard extends StatelessWidget {
             Container(
               width: AppSize.cardImagemEvent,
               height: AppSize.cardImagemEvent,
+              clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(AppSpacing.m),
-                color: AppColors.primary,
               ),
-              child: Image.network(
-                event.imagemUrl,
-                fit: BoxFit.cover,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.network(
+                    event.imagemUrl,
+                    fit: BoxFit.cover,
+                  ),
+                  if (event.isPostponed)
+                    Positioned(
+                      top: 12,
+                      right: -26,
+                      child: Transform.rotate(
+                        angle: 0.785398,
+                        child: Container(
+                          width: 110,
+                          color: const Color(0xFFFF0000),
+                          padding: const EdgeInsets.symmetric(vertical: 3),
+                          child: const Text(
+                            'ADIADO',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: AppColors.textPrimary,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
               ),
             ),
             SizedBox(width: AppSpacing.s),
@@ -68,8 +97,11 @@ class EventCard extends StatelessWidget {
                           size: AppSize.iconSmall,
                           color: AppColors.textSecondary),
                       SizedBox(width: AppSpacing.s),
-                      Text(event.location,
-                          style: Theme.of(context).textTheme.bodySmall),
+                      Expanded(
+                        child: Text(event.location,
+                            maxLines: 2,
+                            style: Theme.of(context).textTheme.bodySmall),
+                      ),
                     ],
                   ),
                 ],

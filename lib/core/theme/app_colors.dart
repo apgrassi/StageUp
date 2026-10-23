@@ -9,4 +9,5 @@ class AppColors {
   static const textPrimary = Color(0xFFFFFFFF);
   static const textSecondary = Color(0xFFA5A5A5);
   static const divider = Color(0xFF292929);
+  static const error = Color(0xFFFF0000);
 }

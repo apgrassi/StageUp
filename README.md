@@ -1,16 +1,46 @@
-# stage_up
+# StageUp
 
-A new Flutter project.
+StageUp é um aplicativo Flutter para descobrir shows e salvar seus eventos favoritos. Por enquanto, o catálogo usa dados de demonstração.
 
-## Getting Started
+## Funcionalidades
 
-This project is a starting point for a Flutter application.
+- **Início** — veja os próximos shows do catálogo.
+- **Explorar** — busque por nome ou local, filtre por categoria e encontre shows em alta ou próximos de você.
+- **Favoritos** — salve seus shows favoritos e consulte a lista mesmo depois de fechar o app.
+- **Perfil** — acesse a tela de visitante e volte ao catálogo pelo botão **Explorar shows**.
 
-A few resources to get you started if this is your first Flutter project:
+O login e a área de ingressos estão em desenvolvimento.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Tecnologias
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Flutter e Dart** — desenvolvimento do aplicativo.
+- **Flutter Modular** — navegação e injeção de dependências.
+- **MobX** — gerenciamento de estado.
+- **SharedPreferences** — armazenamento local dos favoritos.
+- **Geolocator** — acesso à localização para mostrar shows próximos.
+
+## Como executar
+
+Você precisa ter o Git e o Flutter instalados, além de um emulador aberto ou um dispositivo conectado. Use `flutter doctor` para conferir a configuração do ambiente.
+
+```bash
+git clone https://github.com/apgrassi/StageUp.git
+cd StageUp
+flutter pub get
+flutter run
+```
+
+Para ver a seção de shows próximos, permita o acesso à localização quando o app solicitar.
+
+## Estrutura do projeto
+
+- `lib/core/` — tema, navegação entre abas e serviço de localização.
+- `lib/modules/` — módulos de Início, Explorar, Favoritos, Perfil e Ingressos.
+- `lib/modules/home/presenter/mocks/` — catálogo de demonstração com os dados dos shows.
+- `assets/fonts/` — arquivos da fonte Inter usada no app.
+
+## Próximos passos
+
+- Adicionar imagens aos cards dos shows.
+- Implementar o login e exibir os dados da conta no Perfil.
+- Desenvolver a tela Meus ingressos.

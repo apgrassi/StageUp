@@ -199,5 +199,17 @@ abstract class EventMock {
       longitude: -46.6705,
       isTrending: true,
     ),
+    Event(
+      id: 19,
+      name: 'Architects',
+      category: 'Metal',
+      description: '',
+      location: 'Vibra São Paulo',
+      date: DateTime(2027, 04, 18),
+      imagemUrl: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a',
+      latitude: -23.6477,
+      longitude: -46.7238,
+      isTrending: true,
+    ),
   ];
 }

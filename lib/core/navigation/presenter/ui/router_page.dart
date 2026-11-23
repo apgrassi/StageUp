@@ -7,7 +7,7 @@ import 'package:stage_up/modules/favorites/presenter/pages/favorites_page.dart';
 import 'package:stage_up/modules/favorites/presenter/store/favorites_store.dart';
 import 'package:stage_up/modules/home/presenter/pages/home_page.dart';
 import 'package:stage_up/modules/home/presenter/stores/home_store.dart';
-import 'package:stage_up/modules/profile/presenter/profile_page.dart';
+import 'package:stage_up/modules/profile/presenter/ui/profile_page.dart';
 import 'package:stage_up/modules/tickets/presenter/tickets_page.dart';
 
 class RouterPage extends StatelessWidget {
@@ -27,7 +27,7 @@ class RouterPage extends StatelessWidget {
     ExplorePage(exploreStore: exploreStore, favoritesStore: favoriteStore),
     FavoritesPage(store: favoriteStore),
     const TicketsPage(),
-    const ProfilePage(),
+    ProfilePage(onExplore: navigationStore.openExplore),
   ];
 
   @override

@@ -40,6 +40,17 @@ mixin _$NavigationStore on NavigationStoreBase, Store {
   }
 
   @override
+  void openExplore() {
+    final _$actionInfo = _$NavigationStoreBaseActionController.startAction(
+        name: 'NavigationStoreBase.openExplore');
+    try {
+      return super.openExplore();
+    } finally {
+      _$NavigationStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 currentIndex: ${currentIndex}

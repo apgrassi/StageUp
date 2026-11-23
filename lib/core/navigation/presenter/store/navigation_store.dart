@@ -12,4 +12,9 @@ abstract class NavigationStoreBase with Store {
   void setCurrentIndex(int index) {
     currentIndex = index;
   }
+
+  @action
+  void openExplore() {
+    setCurrentIndex(1);
+  }
 }

@@ -22,8 +22,10 @@ class TrendingEventCard extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.network(
-                    event.imagemUrl,
+                  Image(
+                    image: event.imagemUrl.startsWith('assets/')
+                        ? AssetImage(event.imagemUrl)
+                        : NetworkImage(event.imagemUrl),
                     fit: BoxFit.cover,
                   ),
                   if (event.isPostponed)

@@ -22,5 +22,9 @@ class Event {
       this.isTrending = false,
       required this.latitude,
       required this.longitude,
-      this.isPostponed = false});
+      this.isPostponed = false,
+      this.additionalDates = const []});
+
+  final List<DateTime> additionalDates;
+  List<DateTime> get dates => [date, ...additionalDates];
 }

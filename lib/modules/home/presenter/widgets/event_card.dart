@@ -13,14 +13,31 @@ class EventCard extends StatelessWidget {
       this.eventFavoriteIcon = false});
 
   final Event event;
-  final bool eventFavoriteIcon; // como mostra o ícone
-  final VoidCallback onFavoritePressed; // avisa quando clicar
+  final bool eventFavoriteIcon;
+  final VoidCallback onFavoritePressed;
 
   @override
   Widget build(BuildContext context) {
-    final formattedDate = event.isPostponed
-        ? 'Data a ser definida'
-        : DateFormat('dd/MM/yyyy').format(event.date);
+    final dates = event.dates..sort();
+    final firstDate = dates.first;
+    final sameMonthAndYear = dates.every(
+      (date) => date.month == firstDate.month && date.year == firstDate.year,
+    );
+
+    final String formattedDate;
+    if (event.isPostponed) {
+      formattedDate = 'Data a ser definida';
+    } else if (dates.length == 1) {
+      formattedDate = DateFormat('dd/MM/yyyy').format(firstDate);
+    } else if (sameMonthAndYear) {
+      final days = dates.map((date) => date.day).toList();
+      final previousDays = days.take(days.length - 1).join(', ');
+      final monthAndYear = DateFormat('MM/yyyy').format(firstDate);
+
+      formattedDate = '$previousDays e ${days.last}/$monthAndYear';
+    } else {
+      formattedDate = dates.map(DateFormat('dd/MM/yyyy').format).join(' · ');
+    }
     return Container(
       height: AppSize.cardEventHeight,
       decoration: BoxDecoration(
@@ -41,8 +58,10 @@ class EventCard extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.network(
-                    event.imagemUrl,
+                  Image(
+                    image: event.imagemUrl.startsWith('assets/')
+                        ? AssetImage(event.imagemUrl)
+                        : NetworkImage(event.imagemUrl),
                     fit: BoxFit.cover,
                   ),
                   if (event.isPostponed)
